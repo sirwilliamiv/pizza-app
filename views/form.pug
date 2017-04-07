@@ -1,0 +1,46 @@
+extends partials/layout.pug
+
+block content
+  .heading
+        h1=page
+        if msg
+          h2= msg
+  .contact-form
+      form(method='POST')
+        if page === 'Contact'
+          .form-group
+            label(for='name') Name
+            input.form-control#name( type='text' name='name' placeholder='John Doe')
+        if page === 'Login' || page === 'Register' || page === 'Contact'
+          .form-group
+            label( for='email') Email Address
+            input.form-control#email( type='email' name='email' placeholder='you@example.com')
+        if page  === 'Contact'
+          .form-group(class={ active: page === 'Contact'})
+            label( for='phone') phone
+            input.form-control#phone( type='tel' name='phone' placeholder='555-123-1234')
+          .form-group(class={ active: page === 'Contact'} )
+            label( for='message') message
+            textarea.form-control#message( name='message' rows=5  placeholder='what\'s the secret ingredient?')
+        if page === 'Login' || page === 'Register'
+          .form-group(class={ active: page === 'Login' || page === 'Register' })
+                  label( for='password') Password
+                  input.form-control#password(
+                    type='password'
+                    name='password'
+                    placeholder='**********'
+                    required
+                    )
+        if page === 'Register'
+          .form-group
+                  label( for='confirmation') Password Confirmation
+                  input.form-control#confirmation(
+                    type='password'
+                    name='confirmation'
+                    placeholder='**********'
+                    required
+                    )
+        if page
+          .contact-form__submit
+            a.btn.btn-danger.btn-lg(href='/') Cancel
+            input.btn.btn-success.btn-lg(type='submit' value='Submit')
